@@ -24,6 +24,18 @@
         "type": "Point",
         "coordinates": [17.2509, 49.5938]
       }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 3,
+        "nazev": "Ostrava",
+        "popisek": "Krajské město Moravskoslezského kraje."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [18.2925, 49.8353]
+      }
     }
   ]
 }
