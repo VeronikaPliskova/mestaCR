@@ -1,0 +1,39 @@
+// Inicializace mapy – střed ČR
+const map = L.map('map').setView([49.8, 15.5], 7);
+
+// Podkladová mapa OpenStreetMap
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  maxZoom: 19,
+  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> přispěvatelé'
+}).addTo(map);
+
+// Načtení bodů z GeoJSONu
+fetch('body.geojson')
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Nepodařilo se načíst body.geojson (HTTP ' + response.status + ')');
+    }
+    return response.json();
+  })
+  .then(data => {
+    const vrstvaMest = L.geoJSON(data, {
+      onEachFeature: (feature, layer) => {
+        const p = feature.properties;
+        layer.bindPopup(
+          `<div class="popup">
+             <h3>${p.nazev}</h3>
+             <p>${p.popisek}</p>
+             <small>ID: ${p.id}</small>
+           </div>`
+        );
+        layer.bindTooltip(p.nazev);
+      }
+    }).addTo(map);
+
+    // Přiblížení mapy na všechna města
+    map.fitBounds(vrstvaMest.getBounds(), { padding: [50, 50] });
+  })
+  .catch(error => {
+    console.error(error);
+    alert('Chyba při načítání dat: ' + error.message);
+  });
