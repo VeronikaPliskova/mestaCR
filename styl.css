@@ -45,6 +45,3 @@ header h1 {
   color: #777777;
 }
 
-.tmava-mapa {
-  filter: invert(100%) hue-rotate(180deg) brightness(95%) contrast(90%);
-}
