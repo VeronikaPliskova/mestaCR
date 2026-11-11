@@ -44,3 +44,7 @@ header h1 {
 .popup small {
   color: #777777;
 }
+
+.tmava-mapa {
+  filter: invert(100%) hue-rotate(180deg) brightness(95%) contrast(90%);
+}
